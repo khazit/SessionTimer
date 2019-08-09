@@ -1,4 +1,5 @@
 *.config
+.myData
 
 # Compiled class file
 *.class
