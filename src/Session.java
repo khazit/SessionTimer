@@ -9,10 +9,10 @@ public class Session {
   private int id;
   private Date t_start;
   private Date t_end;
-  private String note;
+  private String message;
 
   public Session() {
-    this.note = "";
+    this.message = "";
   }
 
   public int getId() {
@@ -52,12 +52,12 @@ public class Session {
     this.t_end = new Date();
   }
 
-  public void addNote(String note) {
-    this.note = note;
+  public void addMessage(String message) {
+    this.message = message;
   }
 
-  public String getNote() {
-    return this.note;
+  public String getMessage() {
+    return this.message;
   }
 
   public  void filesInit() {
@@ -80,8 +80,9 @@ public class Session {
       File dataFile = new File(".myData");
       if (!dataFile.isFile()) {
         dataFile.createNewFile();
-        BufferedWriter writer = new BufferedWriter(new FileWriter(dataFile));
-        writer.write("id, start, end, note");
+        BufferedWriter writer = new BufferedWriter(new FileWriter(dataFile, true));
+        writer.append("id, start, end, message\n");
+        writer.close();
       }
     } catch(Exception e) {
       e.printStackTrace();
@@ -93,11 +94,11 @@ public class Session {
     StringBuilder str = new StringBuilder();
     str.append(this.getId());
     str.append(", ");
-    str.append(this.getStart());
+    str.append(this.getStart().getTime());
     str.append(", ");
-    str.append(this.getEnd());
+    str.append(this.getEnd().getTime());
     str.append(", ");
-    str.append(this.getNote());
+    str.append(this.getMessage());
     str.append("\n");
     return str.toString();
   }
