@@ -51,7 +51,6 @@ public class Ui extends JPanel {
           sess = new Session();
           sess.start();
           sessionNumber.setText(String.format("Session no. %d", sess.getId()));
-          System.out.print("Session started... ");
           lastTickTime = System.currentTimeMillis();
           timer.start();
           inProgress = true;
@@ -62,12 +61,10 @@ public class Ui extends JPanel {
       @Override
       public void actionPerformed(ActionEvent e) {
         if (inProgress) {
-          System.out.println("Session stopped");
           sess.stop();
           timer.stop();
           sess.save();
           inProgress = false;
-          System.out.print(sess);
           sess = new Session();
         }
       }
