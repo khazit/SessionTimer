@@ -38,7 +38,7 @@ public class Session {
 
   public void save() {
     try {
-      File file = new File(".myData");
+      File file = new File("/home/kh4zit/.sessiontimer/.myData");
       BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
       writer.append(this.toString());
       writer.close();
@@ -63,7 +63,7 @@ public class Session {
   public  void filesInit() {
     try {
       // Get Session id from config file
-      File configFile = new File(".data.config");
+      File configFile = new File("/home/kh4zit/.sessiontimer/.data.config");
       if (configFile.isFile()) {
         FileReader fr = new FileReader(configFile);
         this.id = fr.read();
@@ -77,7 +77,7 @@ public class Session {
       fw.close();
 
       // Check if data file exists
-      File dataFile = new File(".myData");
+      File dataFile = new File("/home/kh4zit/.sessiontimer/.myData");
       if (!dataFile.isFile()) {
         dataFile.createNewFile();
         BufferedWriter writer = new BufferedWriter(new FileWriter(dataFile, true));
