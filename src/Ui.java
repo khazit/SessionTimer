@@ -1,20 +1,14 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.EventQueue;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.time.Duration;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.Dimension;
+import javax.swing.BoxLayout;
 
 public class Ui extends JPanel {
 
@@ -28,10 +22,10 @@ public class Ui extends JPanel {
   public Ui() {
     inProgress = false;
 
-    sessionNumber = new JLabel("Session no.    ");
+    sessionNumber = new JLabel("Session no.");
 
     stopWatch = new JLabel(String.format("%02d:%02d:%02d", 0, 0, 0));
-    timer = new Timer(100, new ActionListener() {
+    timer = new Timer(1000, new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             long runningTime = System.currentTimeMillis() - lastTickTime;
@@ -43,7 +37,7 @@ public class Ui extends JPanel {
             long millis = duration.toMillis();
             long seconds = millis / 1000;
             stopWatch.setText(
-              String.format("%04d:%02d:%02d", hours, minutes, seconds)
+              String.format("%02d:%02d:%02d", hours, minutes, seconds)
             );
         }
     });
@@ -79,9 +73,30 @@ public class Ui extends JPanel {
       }
     });
 
-    this.add(sessionNumber);
-    this.add(startButton);
-    this.add(stopButton);
-    this.add(stopWatch);
+    BoxLayout boxLayout = new BoxLayout(this, BoxLayout.Y_AXIS);
+    this.setLayout(boxLayout);
+
+    sessionNumber.setFont(new Font("Calibri", Font.PLAIN, 16));
+    JPanel titlePanel = new JPanel();
+    titlePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+    titlePanel.add(sessionNumber);
+
+    stopWatch.setFont(new Font("Calibri", Font.BOLD, 54));
+    JPanel stopWatchPanel = new JPanel();
+    stopWatchPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+    stopWatchPanel.add(stopWatch);
+
+    startButton.setFont(new Font("Calibri", Font.PLAIN, 12));
+    startButton.setPreferredSize(new Dimension(58, 36));
+    stopButton.setFont(new Font("Calibri", Font.PLAIN, 12));
+    stopButton.setPreferredSize(new Dimension(58, 36));
+    JPanel buttonPanel = new JPanel();
+    BoxLayout buttonLayout = new BoxLayout(buttonPanel, BoxLayout.X_AXIS);
+    buttonPanel.add(startButton);
+    buttonPanel.add(stopButton);
+
+    this.add(titlePanel);
+    this.add(stopWatchPanel);
+    this.add(buttonPanel);
   }
 }
