@@ -1,5 +1,6 @@
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+import javax.swing.ImageIcon;
 
 public class Main {
 
@@ -18,6 +19,8 @@ public class Main {
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     Ui contentPane = new Ui();
     // Outro
+    ImageIcon icon = new ImageIcon("ressources/icon.png");
+    frame.setIconImage(icon.getImage());
     frame.setBounds(400, 400, 390, 240);
     frame.setContentPane(contentPane);
     frame.setVisible(true);
